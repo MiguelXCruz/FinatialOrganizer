@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "664953186313",
+    "project_id": "finantialorganizer",
+    "storage_bucket": "finantialorganizer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664953186313:android:0edb76c7ca5562e6cc30d8",
+        "android_client_info": {
+          "package_name": "com.miguelxcruz.finatialorganizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664953186313-qhi9guobf6ah2jb6o1cvma2criqijqh5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.miguelxcruz.finatialorganizer",
+            "certificate_hash": "60e7f11e18025780479114d64a5e27aed776d438"
+          }
+        },
+        {
+          "client_id": "664953186313-l4l9j70a95850f4frvci1k9o7agfrl23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaIwaHrH-WhaM4DfX2N55LEnk_mYzS_2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664953186313-l4l9j70a95850f4frvci1k9o7agfrl23.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
