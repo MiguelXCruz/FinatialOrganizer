@@ -23,7 +23,7 @@ import model.User;
 
 public class HomeActivity extends AppCompatActivity {
     FirebaseAuth auth;
-    TextView tvShowUserName;
+    TextView tvShowUserName, tvBalanceGeral;
     ImageView ivLogout;
     User user;
     @Override
@@ -36,18 +36,10 @@ public class HomeActivity extends AppCompatActivity {
 
         tvShowUserName = findViewById(R.id.tvShowUserName);
         ivLogout = findViewById(R.id.ivLogout);
+        tvBalanceGeral = findViewById(R.id.tvBalanceGeral);
+
 
         ShowUserName();
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +51,19 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+
     }
+
+    public void openEarnings (View view){
+        Intent it = new Intent(HomeActivity.this, EarningsActivity.class);
+        startActivity(it);
+    }
+
+    public void openSpendings (View view){
+        Intent it = new Intent(HomeActivity.this, SpendingActivity.class);
+        startActivity(it);
+    }
+
 
     private void ShowUserName(){
         auth = ConfigFirebase.getFirebaseAuth();

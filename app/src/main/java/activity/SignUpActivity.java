@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.miguelxcruz.finatialorganizer.R;
 
 import config.ConfigFirebase;
+import helper.Base64Custom;
 import model.User;
 
 import static com.miguelxcruz.finatialorganizer.R.layout.activity_sign_up;
@@ -90,10 +91,17 @@ public class SignUpActivity extends AppCompatActivity {
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {  /*Completando a task e testando se ela deu certo*/
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if (task.isSuccessful()){ //deu certo
                     Toast.makeText(SignUpActivity.this, "Registro realizado com sucesso\n Faça Login para continuar",
                             Toast.LENGTH_LONG).show();
 
+                    /*Salvando email e senha dentro do Firebase*/
+                    String idUser = Base64Custom.codifing64Base(user.getEmail());
+                    user.setIdUsuario( idUser);
+                    user.save();
+
+                    /*Iniciando a Activity de Login*/
                     Intent it = new Intent(SignUpActivity.this, SignInActivity.class);
                     startActivity(it);
                     finish();

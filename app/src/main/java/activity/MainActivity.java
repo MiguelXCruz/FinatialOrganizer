@@ -85,8 +85,9 @@ public class MainActivity extends IntroActivity {
     }
 
     public void onClickSignIn(View view){
-            Intent it = new Intent (MainActivity.this,SignInActivity.class);
+           Intent it = new Intent (MainActivity.this,SignInActivity.class);
             startActivity(it);
+
     }
 
     public void CheckForLoggedUser(){
