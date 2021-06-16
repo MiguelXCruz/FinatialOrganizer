@@ -13,4 +13,29 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SpendingTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">#FB033D</item>
+        <item name="colorPrimaryVariant">#F13B3B</item>
+        <item name="colorOnPrimary">#D87373</item>
+    </style>
+
+    <style name="EarningsTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">#02FF5F</item>
+        <item name="colorPrimaryVariant">#0CFF10</item>
+        <item name="colorOnPrimary">#73D878</item>
+    </style>
+
+    <style name="Theme.FinatialOrganizer.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.FinatialOrganizer.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.FinatialOrganizer.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -6,13 +6,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 import com.miguelxcruz.finatialorganizer.R;
 
+import config.ConfigFirebase;
+
 public class MainActivity extends IntroActivity {
     TextView tvLogarse;
     Button btCadastrese;
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,8 @@ public class MainActivity extends IntroActivity {
 //        setContentView(R.layout.activity_main);
         btCadastrese = findViewById(R.id.btCadastrese);
         tvLogarse = findViewById(R.id.tvLogarse);
+
+        CheckForLoggedUser();
 
         iniciaSliders();
 
@@ -81,6 +87,15 @@ public class MainActivity extends IntroActivity {
     public void onClickSignIn(View view){
             Intent it = new Intent (MainActivity.this,SignInActivity.class);
             startActivity(it);
+    }
+
+    public void CheckForLoggedUser(){
+        auth = ConfigFirebase.getFirebaseAuth();
+        if (auth.getCurrentUser() != null){
+            Intent it = new Intent(this,HomeActivity.class);
+            startActivity(it);
+            finish();
+        }
     }
 
 }
