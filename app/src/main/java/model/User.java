@@ -10,7 +10,8 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Double totalAmount = 0.00;
+    private Double amount = 0.00;
+    private Double totalEarning = 0.00;
     private Double totalSpending = 0.00;
 
     public User() {
@@ -29,12 +30,20 @@ public class User {
     }
 
 
-    public Double getTotalAmount() {
-        return totalAmount;
+    public Double getAmount() {
+        return amount;
     }
 
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Double getTotalEarning() {
+        return totalEarning;
+    }
+
+    public void setTotalEarning(Double totalEarning) {
+        this.totalEarning = totalEarning;
     }
 
     public Double getTotalSpending() {

@@ -7,24 +7,35 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.miguelxcruz.finatialorganizer.R;
 
 import config.ConfigFirebase;
+import helper.Base64Custom;
 import model.User;
 
 public class HomeActivity extends AppCompatActivity {
     FirebaseAuth auth;
     TextView tvShowUserName, tvBalanceGeral;
     ImageView ivLogout;
+
+    DatabaseReference databaseReference = ConfigFirebase.getFirebaseRef();
+    FirebaseAuth firebaseAuth = ConfigFirebase.getFirebaseAuth();
+
     User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         ShowUserName();
+        getTotalAmount();
 
         ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +78,50 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void ShowUserName(){
-        auth = ConfigFirebase.getFirebaseAuth();
-        String username = auth.getCurrentUser().getEmail();
+        String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
+        String idUser = Base64Custom.codifing64Base(CurrentUser);
+        DatabaseReference userref = databaseReference.child("usuario").child(idUser);
+
+        userref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = snapshot.getValue(User.class);
+               String username = user.getName();
+                tvShowUserName.setText("Olá, "+ username);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
-        tvShowUserName.setText("Olá, "+ username);
+
+
     }
+
+    private void getTotalAmount (){
+        /*Autenticando usuario */
+        String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
+        String idUser = Base64Custom.codifing64Base(CurrentUser);
+
+        DatabaseReference userId = databaseReference.child("usuario").child(idUser);
+
+        userId.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+
 }

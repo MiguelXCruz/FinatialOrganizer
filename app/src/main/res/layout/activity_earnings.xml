@@ -23,7 +23,9 @@
             android:background="#00FFFFFF"
             android:ems="10"
             android:gravity="right"
-            android:hint="R$ 00,00"
+            android:numeric="decimal"
+            android:phoneNumber="true"
+            android:hint="R$ 00.00"
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="36sp"
@@ -48,6 +50,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:phoneNumber="true"
         android:id="@+id/etDate_Earnings"
         android:layout_width="300dp"
         android:layout_height="wrap_content"

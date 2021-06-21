@@ -15,6 +15,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+
+            android:numeric="decimal"
+            android:phoneNumber="true"
             android:id="@+id/etMoney_Spending"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,7 +26,7 @@
             android:background="#00FFFFFF"
             android:ems="10"
             android:gravity="right"
-            android:hint="R$ 00,00"
+            android:hint="R$ 00.00"
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"
             android:textSize="36sp"
@@ -48,6 +51,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+
+        android:numeric="decimal"
+        android:phoneNumber="true"
         android:id="@+id/etDate_Spending"
         android:layout_width="300dp"
         android:layout_height="wrap_content"

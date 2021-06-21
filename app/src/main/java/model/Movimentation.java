@@ -11,7 +11,7 @@ import helper.Base64Custom;
 
 public class Movimentation {
 
-    private String date;
+    private String date = null;
     private String description;
     private String category;
     private String type;
@@ -24,22 +24,24 @@ public class Movimentation {
         FirebaseAuth auth = ConfigFirebase.getFirebaseAuth();
         String idUser = Base64Custom.codifing64Base(auth.getCurrentUser().getEmail());
 
-        String firabaseDate = firebaseDatePatern();
+        String datePattern = firebaseDatePatern(ChoosedDate);
 
         DatabaseReference firebase = ConfigFirebase.getFirebaseRef();
         firebase.child("movimentation")
                 .child(idUser)
-                .child(firabaseDate)
+                .child(datePattern)
                 .push()
                 .setValue(this);
     }
 
-    public String firebaseDatePatern (){
-        SimpleDateFormat firebaseDate = new SimpleDateFormat("MMyyyy");
-        Date date = new Date();
-        String returnedDate = firebaseDate.format(date);
+    public static String firebaseDatePatern (String ChoosedDate){
+        String returndate [] = ChoosedDate.split("/");
+        String dia = returndate[0];
+        String mes = returndate[1];
+        String ano = returndate[2];
 
-        return returnedDate;
+        String DatePattern = mes + ano;
+        return DatePattern;
     }
 
     public String getCategory() {
