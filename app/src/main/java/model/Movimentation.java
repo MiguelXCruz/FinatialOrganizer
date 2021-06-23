@@ -11,7 +11,7 @@ import helper.Base64Custom;
 
 public class Movimentation {
 
-    private String date = null;
+    private String date;
     private String description;
     private String category;
     private String type;
