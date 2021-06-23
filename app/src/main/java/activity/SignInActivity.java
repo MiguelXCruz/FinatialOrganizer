@@ -50,7 +50,6 @@ public class SignInActivity extends AppCompatActivity {
 
 
                             UserLogin(email, password, v);
-                            finish();
 
 
                         }else{
@@ -75,6 +74,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (task.isSuccessful()){ //deu certo
                     Intent it = new Intent(SignInActivity.this,HomeActivity.class);
                     startActivity(it);
+                    finish();
                     
 
                 }else{ //deu erro
