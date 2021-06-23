@@ -20,6 +20,8 @@ allprojects {
         jcenter()
         //importando sliders
         maven { url 'https://jitpack.io' }
+        mavenCentral()
+
     }
 }
 

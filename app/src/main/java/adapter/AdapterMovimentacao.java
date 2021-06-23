@@ -42,11 +42,14 @@ public class AdapterMovimentacao extends RecyclerView.Adapter<AdapterMovimentaca
         holder.category.setText(movimentation.getCategory());
 
 
+        if (movimentation.getType().equals("e")){
+            holder.value.setTextColor(context.getResources().getColor(R.color.earning));
+        }
 
-       /* if (movimentation.getType().equals("s")  || movimentation.getType().equals("e")) {
-            holder.value.setTextColor(context.getResources().getColor(R.color.purple_200));
+       if (movimentation.getType().equals("s")){
+            holder.value.setTextColor(context.getResources().getColor(R.color.spending));
             holder.value.setText("-" + movimentation.getValue());
-        }*/
+        }
     }
 
 

@@ -1,5 +1,6 @@
 package activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,8 +10,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +52,8 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView rvMovimentation;
     AdapterMovimentacao adapterMovimentacao;
     List<Movimentation> movimentations = new ArrayList<>();
+
+
     Movimentation movimentation;
 
     Double despesaTotal = 0.0;
@@ -56,7 +62,6 @@ public class HomeActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference = ConfigFirebase.getFirebaseRef();
     FirebaseAuth firebaseAuth = ConfigFirebase.getFirebaseAuth();
-    DatabaseReference movimentationRef;
 
     String selectedMonthYear;
 
@@ -81,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
         calendarViewConfiguration();
         getResumo();
         getMovimentations();
-
+        swipe();
 
         ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
 
 
@@ -123,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
                 String selectedMonth = String.format("%02d",date.getMonth());
                 selectedMonthYear = String.valueOf(selectedMonth + "" + date.getYear());
-
+                getMovimentations();
             }
         });
 
@@ -166,10 +172,7 @@ public class HomeActivity extends AppCompatActivity {
         String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
         String idUser = Base64Custom.codifing64Base(CurrentUser);
 
-        movimentationRef = ConfigFirebase.getFirebaseRef();
-
-        movimentationRef.child("movimentation").child(idUser).child(selectedMonthYear);
-
+        DatabaseReference movimentationRef = databaseReference.child("movimentation").child(idUser).child(selectedMonthYear);
 
 
         movimentationRef.addValueEventListener(new ValueEventListener() {
@@ -178,7 +181,9 @@ public class HomeActivity extends AppCompatActivity {
 
                 movimentations.clear();
                 for (DataSnapshot dados: snapshot.getChildren() ){
+
                     Movimentation movimentacao = dados.getValue( Movimentation.class );
+                    movimentacao.setKey(dados.getKey());
                     movimentations.add( movimentacao );
 
                 }
@@ -193,11 +198,91 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    public void  swipe (){
+        ItemTouchHelper.Callback itemtouch = new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+
+                int dragflags = ItemTouchHelper.ACTION_STATE_IDLE;
+                int swipeFlags = ItemTouchHelper.END;
+                return makeMovementFlags(dragflags,swipeFlags);
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                excludeMovimentation(viewHolder);
+            }
+        };
+
+        new ItemTouchHelper(itemtouch).attachToRecyclerView(rvMovimentation);
+    }
+
+    public void excludeMovimentation (RecyclerView.ViewHolder viewHolder){
+
+        AlertDialog.Builder alertdialog = new AlertDialog.Builder(this);
+
+        alertdialog.setTitle("Exclusão de movimentação");
+        alertdialog.setMessage("Tem certeza que deseja excluir essa movimentação?");
+
+        alertdialog.setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int position = viewHolder.getAdapterPosition();
+                movimentation = movimentations.get(position);
+
+                String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
+                String idUser = Base64Custom.codifing64Base(CurrentUser);
+
+                DatabaseReference movimentationRef = databaseReference.child("movimentation").child(idUser).child(selectedMonthYear);
+
+                movimentationRef.child(movimentation.getKey()).removeValue();
+                adapterMovimentacao.notifyItemRemoved(position);
+                attMoney();
+
+            }
+        });
+
+
+        alertdialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(HomeActivity.this, "Operação Cancelada", Toast.LENGTH_SHORT).show();
+                adapterMovimentacao.notifyDataSetChanged();
+            }
+        });
+
+        alertdialog.create();
+        alertdialog.show();
+
+    }
+
+    public void attMoney (){
+        String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
+        String idUser = Base64Custom.codifing64Base(CurrentUser);
+
+        DatabaseReference userId = databaseReference.child("usuario").child(idUser);
+
+        if (movimentation.getType().equals("e")){
+            receitaTotal = receitaTotal - movimentation.getValue();
+            userId.child("totalEarning").setValue(receitaTotal);
+        }
+
+        if (movimentation.getType().equals("s")){
+            despesaTotal = despesaTotal - movimentation.getValue();
+            userId.child("totalSpending").setValue(despesaTotal);
+        }
+    }
 
     public void getResumo (){
         /*Autenticando usuario */
         String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
         String idUser = Base64Custom.codifing64Base(CurrentUser);
+
         DatabaseReference userId = databaseReference.child("usuario").child(idUser);
 
         userId.addValueEventListener(new ValueEventListener() {
@@ -223,5 +308,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
+    }
 }
 

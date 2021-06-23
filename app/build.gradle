@@ -59,6 +59,9 @@ dependencies {
 
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
 
+    //mask view
+
+    implementation 'io.github.vicmikhailau:MaskedEditText:4.0.5'
 }
 
 //firebase

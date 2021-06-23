@@ -16,6 +16,9 @@ public class Movimentation {
     private String category;
     private String type;
     private Double value;
+    private String key;
+
+
 
     public Movimentation() {
     }
@@ -42,6 +45,14 @@ public class Movimentation {
 
         String DatePattern = mes + ano;
         return DatePattern;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getCategory() {
