@@ -50,6 +50,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
                             UserLogin(email, password, v);
+                            finish();
 
 
                         }else{
@@ -72,7 +73,6 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){ //deu certo
-                    finish();
                     Intent it = new Intent(SignInActivity.this,HomeActivity.class);
                     startActivity(it);
                     

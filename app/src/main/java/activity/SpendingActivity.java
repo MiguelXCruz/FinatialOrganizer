@@ -122,13 +122,8 @@ public class SpendingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                /*despesatotal= user.getTotalSpending();*/
+                despesatotal= user.getTotalSpending();
 
-                /*Testando o GET do firebase*/
-
-                System.out.println("DespesaTotal" + user.getTotalSpending());
-                System.out.println("Email" + user.getEmail());
-                System.out.println("Nome" + user.getName());
             }
 
             @Override
@@ -139,12 +134,12 @@ public class SpendingActivity extends AppCompatActivity {
 
     }
 
-    public void attSpendings (Double despesaTotalAtualizada){
+    public void attSpendings (Double despesa){
         String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
         String idUser = Base64Custom.codifing64Base(CurrentUser);
         DatabaseReference userref = firebaseRef.child("usuario").child(idUser);
 
-        userref.child("totalSpending").setValue(despesaTotalAtualizada);
+        userref.child("totalSpending").setValue(despesa);
 
     }
 

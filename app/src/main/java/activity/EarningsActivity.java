@@ -22,6 +22,7 @@ import java.util.Date;
 
 import config.ConfigFirebase;
 import helper.Base64Custom;
+import helper.DateCustom;
 import model.Movimentation;
 import model.User;
 
@@ -46,9 +47,9 @@ public class EarningsActivity extends AppCompatActivity {
         etDescription_Earnings = findViewById(R.id.etDescription_Earnings);
         btAddEarnings = findViewById(R.id.btAddEarnings);
 
-        /*Mostrando a data de hoje*/
-        String todayDate = getAtualDate();
-        etDate_Earnings.setText(todayDate);
+        etDate_Earnings.setText(DateCustom.todayDate());
+
+        recoveryTotalEarnings();
 
 
 
@@ -109,17 +110,9 @@ public class EarningsActivity extends AppCompatActivity {
         });
     }
 
-    public String getAtualDate (){
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        String returnedDate = formatDate.format(date);
-
-        return returnedDate;
-    }
 
 
-    public void totalAmount(){
-        /*Autenticando usuario */
+    public void recoveryTotalEarnings(){
         String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
         String idUser = Base64Custom.codifing64Base(CurrentUser);
         DatabaseReference userref = databaseReference.child("usuario").child(idUser);
@@ -128,7 +121,8 @@ public class EarningsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 User user = snapshot.getValue(User.class);
-                EarningTotal = user.getTotalEarning();
+                EarningTotal= user.getTotalEarning();
+
             }
 
             @Override
@@ -139,15 +133,12 @@ public class EarningsActivity extends AppCompatActivity {
 
     }
 
-    public void attEarnings (Double ganhosTotalAtualizada){
-        /*Autenticando user*/
+    public void attEarnings (Double ganhos){
         String CurrentUser = firebaseAuth.getCurrentUser().getEmail();
         String idUser = Base64Custom.codifing64Base(CurrentUser);
         DatabaseReference userref = databaseReference.child("usuario").child(idUser);
 
-        /*Salvando valor na DB*/
-        userref.child("totalEarning").setValue(ganhosTotalAtualizada);
-
+        userref.child("totalEarning").setValue(ganhos);
 
     }
 
