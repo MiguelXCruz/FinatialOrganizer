@@ -25,6 +25,7 @@ public class MainActivity extends IntroActivity {
         btCadastrese = findViewById(R.id.btCadastrese);
         tvLogarse = findViewById(R.id.tvLogarse);
 
+
         CheckForLoggedUser();
 
         iniciaSliders();

@@ -82,11 +82,13 @@ public class HomeActivity extends AppCompatActivity {
         rvMovimentation = findViewById(R.id.rvMovimentation);
 
 
+
         ShowUserName();
         calendarViewConfiguration();
         getResumo();
         getMovimentations();
         swipe();
+
 
         ivLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -307,6 +309,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+
 
     @Override
     public void onBackPressed() {

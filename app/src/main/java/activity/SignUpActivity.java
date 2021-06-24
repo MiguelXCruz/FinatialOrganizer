@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ import static com.miguelxcruz.finatialorganizer.R.layout.activity_sign_up;
 public class SignUpActivity extends AppCompatActivity {
     EditText etNameRegister, etEmailRegister, etPasswordRegister;
     Button btSignup;
+
+
     TextView tvUseTerms;
     FirebaseAuth auth;
     User user;
@@ -81,6 +84,8 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     public void UserRegister(View view){

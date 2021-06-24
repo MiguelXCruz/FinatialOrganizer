@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +29,8 @@ import model.User;
 public class SignInActivity extends AppCompatActivity {
     EditText etEmailLogin, etPasswordLogin;
     Button btSignIn;
+    TextView tvForgetPassword, tvCadastresse;
+
     FirebaseAuth auth;
     User user;
 
@@ -38,6 +42,8 @@ public class SignInActivity extends AppCompatActivity {
         etEmailLogin = findViewById(R.id.etEmailLogin);
         etPasswordLogin = findViewById(R.id.etPasswordLogin);
         btSignIn = findViewById(R.id.btSignIn);
+        tvForgetPassword = findViewById(R.id.tvForgotPassword);
+        tvCadastresse = findViewById(R.id.tvCadastresse);
 
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +69,23 @@ public class SignInActivity extends AppCompatActivity {
 
             }
         });
+
+        tvCadastresse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(it);
+            }
+        });
+
+
+        tvForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //fazer recuperação de senha
+            }
+        });
+
     }
 
 
