@@ -30,6 +30,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText etEmailLogin, etPasswordLogin;
     Button btSignIn;
     TextView tvForgetPassword, tvCadastresse;
+    ImageView ivBackButton_SignIn;
 
     FirebaseAuth auth;
     User user;
@@ -44,6 +45,14 @@ public class SignInActivity extends AppCompatActivity {
         btSignIn = findViewById(R.id.btSignIn);
         tvForgetPassword = findViewById(R.id.tvForgotPassword);
         tvCadastresse = findViewById(R.id.tvCadastresse);
+        ivBackButton_SignIn = findViewById(R.id.ivBackButton_SignIn);
+
+        ivBackButton_SignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         btSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +91,8 @@ public class SignInActivity extends AppCompatActivity {
         tvForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //fazer recuperação de senha
+                Intent it = new Intent(getApplicationContext(),ResetPassword.class);
+                startActivity(it);
             }
         });
 

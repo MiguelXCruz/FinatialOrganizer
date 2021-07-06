@@ -23,12 +23,13 @@ public class MainActivity extends IntroActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         btCadastrese = findViewById(R.id.btCadastrese);
-        tvLogarse = findViewById(R.id.tvLogarse);
+        tvLogarse = findViewById(R.id.btLogarse);
 
 
         CheckForLoggedUser();
 
         iniciaSliders();
+
 
     }
 
@@ -75,7 +76,7 @@ public class MainActivity extends IntroActivity {
         addSlide(new FragmentSlide.Builder()
         .background(R.color.white)
         .fragment(R.layout.slide_5)
-        .canGoForward(false)
+        .canGoForward(false).background(R.color.primaryColor).backgroundDark(R.color.primaryColor)
         .build()
         );
     } //final iniciaSliders

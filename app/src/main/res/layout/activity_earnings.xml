@@ -23,8 +23,6 @@
             android:background="#00FFFFFF"
             android:ems="10"
             android:gravity="right"
-            android:numeric="decimal"
-            android:phoneNumber="true"
             android:hint="R$ 00.00"
             android:inputType="textPersonName"
             android:textColor="#FFFFFF"

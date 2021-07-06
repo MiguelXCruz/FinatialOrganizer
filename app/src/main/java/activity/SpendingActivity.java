@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ import helper.Base64Custom;
 import helper.DateCustom;
 import model.Movimentation;
 import model.User;
+import util.MaskEditUtil;
 
 public class SpendingActivity extends AppCompatActivity {
     EditText etMoney_Spending, etCategory_Spendings, etDate_Spending, etDescription_Spending;
@@ -49,6 +52,13 @@ public class SpendingActivity extends AppCompatActivity {
 
         recoveryTotalSpending();
         etDate_Spending.setText(DateCustom.todayDate());
+
+        /*Settando types e masks nos ET's*/
+
+        /*Teclado numerico no etMoney*/
+        int numericType = UCharacter.NumericType.NUMERIC;
+        etMoney_Spending.setInputType(numericType);
+
 
         btAddSpending.setOnClickListener(new View.OnClickListener() {
             @Override

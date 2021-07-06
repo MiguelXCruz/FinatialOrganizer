@@ -12,15 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FinatialOrganizer">
-        <activity android:name="activity.EarningsActivity" android:theme="@style/EarningsTheme">
-        </activity>
-        <activity android:name="activity.SpendingActivity" android:theme="@style/SpendingTheme" />
+        <activity android:name="activity.ResetPassword"></activity>
+        <activity
+            android:name="activity.EarningsActivity"
+            android:theme="@style/EarningsTheme"></activity>
+        <activity
+            android:name="activity.SpendingActivity"
+            android:theme="@style/SpendingTheme" />
         <activity
             android:name="activity.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.FinatialOrganizer.NoActionBar" />
-        <activity android:name="activity.SignInActivity"  android:theme="@style/Theme.FinatialOrganizer.NoActionBar" />
-        <activity android:name="activity.SignUpActivity" android:theme="@style/Theme.FinatialOrganizer.NoActionBar" />
+        <activity
+            android:name="activity.SignInActivity"
+            android:theme="@style/Theme.FinatialOrganizer.NoActionBar" />
+        <activity
+            android:name="activity.SignUpActivity"
+            android:theme="@style/Theme.FinatialOrganizer.NoActionBar" />
         <activity android:name="activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,9 @@ public class EarningsActivity extends AppCompatActivity {
         btAddEarnings = findViewById(R.id.btAddEarnings);
 
         etDate_Earnings.setText(DateCustom.todayDate());
+
+        int numericType = UCharacter.NumericType.NUMERIC;
+        etMoney_Earnings.setInputType(numericType);
 
         recoveryTotalEarnings();
 

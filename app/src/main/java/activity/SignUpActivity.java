@@ -31,6 +31,7 @@ import static com.miguelxcruz.finatialorganizer.R.layout.activity_sign_up;
 public class SignUpActivity extends AppCompatActivity {
     EditText etNameRegister, etEmailRegister, etPasswordRegister;
     Button btSignup;
+    ImageView ivBackButton_SignUp;
 
 
     TextView tvUseTerms;
@@ -47,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
         etPasswordRegister = findViewById(R.id.etPasswordRegister);
         btSignup = findViewById(R.id.btSignup);
         tvUseTerms = findViewById(R.id.tvUseTerms);
+        ivBackButton_SignUp = findViewById(R.id.ivBackButton_SignUp);
 
         btSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +87,12 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        ivBackButton_SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 

@@ -11,4 +11,5 @@
     <color name="spending">#FF1100</color>
     <color name="transparent">#00F44336</color>
     <color name="blueButton">#1074CC </color>
+    <color name="primaryColor">#0040c3 </color>
 </resources>

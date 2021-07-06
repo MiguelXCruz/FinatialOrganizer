@@ -12,6 +12,7 @@ android {
         applicationId "com.miguelxcruz.finatialorganizer"
         minSdkVersion 16
         targetSdkVersion 30
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -60,8 +61,17 @@ dependencies {
     implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
 
     //mask view
-
     implementation 'io.github.vicmikhailau:MaskedEditText:4.0.5'
+
+
+    implementation 'com.github.salahamassi:android-mask-date-editText:v1.02'
+
+
+    //multidex (to generete the APK
+    implementation "androidx.multidex:multidex:2.0.1"
+
+
+
 }
 
 //firebase
